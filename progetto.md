@@ -49,7 +49,7 @@ Sudo impacket-ntlmrelayx -t ldap://192.168.109.250 --dump-hashes
 ![alt text](avviorelayx.png)
 
 After the execution it starts loading many client processes ready for impersonating the victim, and also many server processes to bait some user to attempt connection to his machine. Now the attacker needs only to wait for incoming connections.
-If for example an user attempt to to resolve an hostname on the network, such as a shared folder path, the client attemtps to resolve the name using his DNS server (in this scenario the DNS server controlled by the attacker), and if the name is not a DNS name (eg. NetBIOS Name) another protocol is used such as LLMNS. IMPORTANTE 
+If for example an user attempt to to resolve an hostname on the network, such as a shared folder path, the client attemtps to resolve the name using his DNS server (in this scenario the DNS server controlled by the attacker), and if the name is not a DNS name (eg. NetBIOS Name) another protocol is used such as LLMNS.  
 Let's suppose the victim is trying to access the resources at:
 ```
 \\test.local
@@ -59,7 +59,7 @@ Let's suppose the victim is trying to access the resources at:
 
 At this point an NTLM authentication starts, and all his traffic is intercepted by the attacker and relayed to the domain controller. The domain controller is queried, and asked for hash-dumping.
 
-![alt text](esecuzionentlmrelayx.png)
+![ntlmrelay](esecuzionentlmrelayx.png)
 
 In this case the attacker is lucky because the account he is impersonating is a domain account with administrator privilege, and so is able to receive the information he requested (in this case the password hash), and as we can see in the previous image is able to create users, adding user to priviliged groups, or modifying ACL of resources.
 
@@ -73,4 +73,4 @@ This attack exploits the NTLM authentication protocol, even though this protocol
 
 1. mitm6: [https://www.kali.org/tools/mitm6/](https://www.kali.org/tools/mitm6/)
 2. impacket-scripts: [https://www.kali.org/tools/impacket-scripts/](https://www.kali.org/tools/impacket-scripts/)
-3. ChatGPT (for )
+3. ChatGPT (for preparing the domain controller server)
